@@ -1,0 +1,19 @@
+language: julia
+os:
+  - linux
+  - osx
+julia:
+  - 0.7
+  - 1.0
+  - nightly
+
+codecov: true
+coveralls: true
+
+notifications:
+  email: false
+
+after_success:
+  - julia -e 'using Pkg; Pkg.add("Plots"); Pkg.add("GR"); Pkg.add("DataFrames"); Pkg.add("CSV")' # DocDeps
+  - julia -e 'using Pkg; Pkg.add("Documenter")'
+  - julia -e 'include(joinpath("docs", "make.jl"))'
